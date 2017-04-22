@@ -151,7 +151,7 @@
                     " - rm /tmp/rea-deploy.zip\n",
                     " - ln -s /opt/rea-deploy/rea-deploy/master/etc/masterless.conf /etc/salt/minion.d/\n",
                     " - service salt-minion stop\n",
-                    " - salt-call state.highstate\n",
+                    " - salt-call --local state.highstate\n",
                 ]]}}
             }
         },
