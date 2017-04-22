@@ -24,16 +24,26 @@ ruby-bundler:
     pkg:
         - latest
 
+/opt/simple-sinatra-app:
+    file.directory:
+        - user: www-data
+        - group: www-data
+        - makedirs: True
+
 git clone rea-cruitment/simple-sinatra-app:
     git.latest:
         - name: https://github.com/rea-cruitment/simple-sinatra-app.git
         - target: /opt/simple-sinatra-app
+        - user: www-data
         - force_clone: True
+        - require:
+            - file: /opt/simple-sinatra-app
 
 bundle install:
     cmd.run:
         - name: bundle install
         - cwd: /opt/simple-sinatra-app
+        - runas: www-data
         - watch:
             - git: https://github.com/rea-cruitment/simple-sinatra-app.git
         - require:
@@ -44,6 +54,7 @@ rackup:
     cmd.run:
         - name: bundle exec rackup -D
         - cwd: /opt/simple-sinatra-app
+        - runas: www-data
         - require:
             - bundle install
             - pkg: ruby-bundler
