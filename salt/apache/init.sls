@@ -6,7 +6,7 @@ apache2:
         - enable: True
         - restart: True
         - watch:
-            - file: /etc/apache2/sites-enabled/*
+            - a2ensite *
             - a2enmod *
             - pkg: apache2
     file:
