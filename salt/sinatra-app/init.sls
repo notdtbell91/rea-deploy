@@ -5,11 +5,11 @@
         - group: root
         - mode: '0644'
         - require:
-            -pkg: apache2
+            - pkg: apache2
 
 Enable proxy and proxy_http modules:
     apache_module.enabled:
-        -names:
+        - names:
             - proxy
             - proxy_http
 
