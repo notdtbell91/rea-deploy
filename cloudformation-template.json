@@ -140,14 +140,15 @@
                 ],
                 "UserData": { "Fn::Base64" : { "Fn::Join" : ["", [
                     "#cloud-config\n",
-                    "packages:\n",
-                    " - unzip\n",
-
                     "runcmd:\n",
-                    " - [ mkdir, -p, /opt/rea-deploy ]\n",
-                    " - [ wget, \"https://github.com/notdtbell91/rea-deploy/archive/master.zip\", -O, /tmp/rea-deploy.zip ]\n",
-                    " - [ unzip, /tmp/master.zip, /opt/rea-deploy ]\n",
-                    " - [ rm, /tmp/rea-deploy.zip ]\n",
+                    " - wget https://repo.saltstack.com/apt/ubuntu/16.04/amd64/latest/SALTSTACK-GPG-KEY.pub -O - | apt-key add -\n",
+                    " - echo \"deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/latest xenial main\" > /etc/apt/sources.list.d/saltstack.list\n",
+                    " - apt-get update\n",
+                    " - apt-get install -y unzip salt-minion\n",
+                    " - mkdir -p /opt/rea-deploy\n",
+                    " - wget https://github.com/notdtbell91/rea-deploy/archive/master.zip -O /tmp/rea-deploy.zip\n",
+                    " - unzip /tmp/rea-deploy.zip -d /opt/rea-deploy\n",
+                    " - rm /tmp/rea-deploy.zip\n",
                 ]]}}
             }
         },
