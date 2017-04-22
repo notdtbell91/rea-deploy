@@ -19,3 +19,25 @@ a2enmod - Enable proxy and proxy_http modules:
         - names:
             - proxy
             - proxy_http
+
+git clone rea-cruitment/simple-sinatra-app:
+    git.latest:
+        - name: https://github.com/rea-cruitment/simple-sinatra-app.git
+        - target: /opt/simple-sinatra-app
+        - force_clone: True
+
+bundle install:
+    cmd.run:
+        - name: bundle install
+        - cwd: /opt/simple-sinatra-app
+        - watch:
+            - git: https://github.com/rea-cruitment/simple-sinatra-app.git
+        - require:
+            - git clone rea-cruitment/simple-sinatra-app
+
+rackup:
+    cmd.run:
+        - name: bundle exec rackup -D
+        - cwd: /opt/simple-sinatra-app
+        - require:
+            - bundle install
