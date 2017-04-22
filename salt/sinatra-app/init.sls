@@ -12,8 +12,3 @@ Enable proxy and proxy_http modules:
         - names:
             - proxy
             - proxy_http
-
-Restart Apache2 Service:
-    service.running:
-        name: apache2
-        restart: True
