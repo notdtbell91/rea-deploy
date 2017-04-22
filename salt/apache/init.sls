@@ -7,5 +7,8 @@ apache2:
         - restart: True
         - watch:
             - file: /etc/apache2/sites-enabled/*
-            - file: /etc/apache2/mods-enabled/*
+            - a2enmod *
             - pkg: apache2
+    file:
+        - absent
+        - name: /etc/apache2/sites-enabled/000-default.conf

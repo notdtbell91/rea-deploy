@@ -7,7 +7,11 @@
         - require:
             - pkg: apache2
 
-Enable proxy and proxy_http modules:
+/etc/apache2/sites-enabled/simple-sinatra-app.conf:
+    file.symlink:
+        - target: /etc/apache2/sites-available/simple-sinatra-app.conf
+
+a2enmod - Enable proxy and proxy_http modules:
     apache_module.enabled:
         - names:
             - proxy
