@@ -8,6 +8,7 @@ apache2:
         - watch:
             - a2enmod *
             - file: /etc/apache2/sites-enabled/*
+            - file: /etc/apache2/sites-available/*
             - pkg: apache2
     file:
         - absent
