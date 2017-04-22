@@ -22,7 +22,7 @@ a2enmod - Enable proxy and proxy_http modules:
 
 ruby-bundler:
     pkg:
-        - latest:
+        - latest
 
 git clone rea-cruitment/simple-sinatra-app:
     git.latest:
