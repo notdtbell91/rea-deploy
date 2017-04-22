@@ -146,7 +146,7 @@
                     "runcmd:\n",
                     " - [ mkdir, -p, /opt/rea-deploy ]\n",
                     " - [ wget, \"https://github.com/notdtbell91/rea-deploy/archive/master.zip\", -O, /tmp/rea-deploy.zip ]\n",
-                    " - [ unzip, /tmp/rea-deploy.zip, /opt/rea-deploy ]\n",
+                    " - [ unzip, /tmp/master.zip, /opt/rea-deploy ]\n",
                     " - [ rm, /tmp/rea-deploy.zip ]\n",
                 ]]}}
             }
