@@ -177,5 +177,11 @@
                 ]
             }
         }
+    },
+    "Outputs": {
+        "WebsiteURL": {
+            "Value": { "Fn::Join": ["", ["http://", { "Fn::GetAtt": [ "Instance", "PublicDnsName" ]}]]},
+            "Description": "Website URL"
+        }
     }
 }
