@@ -1,7 +1,7 @@
 ssh:
     service:
         - running
-        - enabled: True
+        - enable: True
         - restart: True
         - watch:
             - file: /etc/ssh/sshd_config
