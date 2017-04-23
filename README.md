@@ -12,7 +12,7 @@ This solution deploys a new Amazon AWS EC2 instance using CloudFormation and con
 1. Download the cloudformation-template.json and cloudformation-params.json from this repository
 2. Customise the parameters defined in cloudformation-params.json as required
  * InstanceType (default: t2.micro)
- * KeyName
+ * KeyName (default: 'desktop')
  * SSHLocation (default: 0.0.0.0/0)
 3. Run the following command, substituting the path to your cloudformation-template.json and cloudformation-params.json, and optionally the stack-name to something different:
 
@@ -67,9 +67,15 @@ Ubuntu was chosen as Canonical provide base AMIs for most regions which enables 
 
 A Security Group was used to lockdown network access rather than configuring iptables/ufw on the host to maintain simplicity.
 
+**SSH Lockdowns**
+
+The SSH service has been locked down following guidelines from Mozilla (https://wiki.mozilla.org/Security/Guidelines/OpenSSH) and Center for Internet Security (https://benchmarks.cisecurity.org/downloads/benchmarks/)
+
+The reader may find that they are unable to SSH to the host if they are using an older verison of OpenSSH, do not have a sufficiently strong key, or have not enabled support for newer ciphers. Consult the Mozilla link about for assistance, or SSH into the instance before Salt has configured these lockdowns.
+
 ## Short Comings / Future Improvements
 
- * An ELB could be configured to allow recovery of a failed host, allow additional hosts to be added to share the load, or allow Blue/Green deployments of new versions of software.
+ * An ELB could be configured to allow recovery of a failed host, allow additional hosts to be added to share the load, or allow deployments of new versions of software without an outage.
  * A Salt-master could be added to allow centralised control of a greater numbers of hosts as well as remote deployment of new/updated salt states.
  * Additional host lockdowns could be performed, such as following CIS (Center for Internet Security) Guidelines/Benchmarks. These were not performed to maintain the simplicity of the presented solution and due to the very small attack surface of the host.
  * HTTPS could be configured, and automated using Lets Encrypt, to protect the integrity and privacy of the web traffic. This was not performed as part of this solution to maintain simplicity, and as the task explicitly asked that the simple-sinatra-app be available on HTTP on port 80.
