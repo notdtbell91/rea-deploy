@@ -50,11 +50,17 @@ bundle install:
             - git clone rea-cruitment/simple-sinatra-app
             - pkg: ruby-bundler
 
-rackup:
-    cmd.run:
-        - name: bundle exec rackup -D
-        - cwd: /opt/rea-cruitment/simple-sinatra-app
-        - runas: www-data
-        - require:
-            - bundle install
-            - pkg: ruby-bundler
+simple-sinatra-app_unit:
+    file.managed:
+        - name: /etc/systemd/system/simple-sinatra-app.service
+        - source: salt://sinatra-app/simple-sinatra-app.service
+    module.run:
+        - name: service.systemctl_reload
+        - onchanges:
+            - file: simple-sinatra-app_unit
+
+simple-sinatra-app_running:
+    service.running:
+        - name: simple-sinatra-app
+        - watch:
+            - module: simple-sinatra-app_unit

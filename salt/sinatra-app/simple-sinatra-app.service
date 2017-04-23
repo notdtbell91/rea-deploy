@@ -1,0 +1,12 @@
+[Unit]
+Description=simple-sinatra-app
+
+[Service]
+ExecStart=/usr/bin/bundle exec rackup
+WorkingDirectory=/opt/rea-cruitment/simple-sinatra-app
+Type=simple
+User=www-data
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
