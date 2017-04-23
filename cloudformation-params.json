@@ -1,0 +1,14 @@
+[
+    {
+        "ParameterKey": "InstanceType",
+        "ParameterValue": "t2.nano"
+    },
+    {
+        "ParameterKey": "KeyName",
+        "ParameterValue": "desktop"
+    },
+    {
+        "ParameterKey": "SSHLocation",
+        "ParameterValue": "0.0.0.0/0"
+    }
+]
