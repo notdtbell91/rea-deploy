@@ -41,7 +41,7 @@ git clone rea-cruitment/simple-sinatra-app:
 
 bundle install:
     cmd.run:
-        - name: bundle install
+        - name: bundle install --path bundle
         - cwd: /opt/rea-cruitment/simple-sinatra-app
         - runas: www-data
         - watch:
@@ -64,3 +64,5 @@ simple-sinatra-app_running:
         - name: simple-sinatra-app
         - watch:
             - module: simple-sinatra-app_unit
+        - require:
+            - bundle install
