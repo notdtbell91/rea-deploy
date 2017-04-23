@@ -52,7 +52,7 @@ Salt configurations are then used to:
 # Design Choices
 **CloudFormation**
 
-CloudFormation was chosen as an easy and consistent way to provision an EC2 instance and other required resources quickly in a repeatable way. It also allows for bootstraping of the configuration by a Configuration Management tool, such as Salt.
+CloudFormation was chosen as an easy and consistent way to provision an EC2 instance and other required resources quickly in a repeatable way. It also allows for bootstrapping of the configuration by a Configuration Management tool, such as Salt.
 
 **Salt**
 
