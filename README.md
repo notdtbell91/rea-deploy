@@ -3,11 +3,11 @@ For more information about the task, see: https://github.com/rea-cruitment/simpl
 
 This solution deploys a new Amazon AWS EC2 instance using CloudFormation and configures the server using Salt.
 
-# Requirements
+## Requirements
  * An AWS Account
  * awscli tools, configured with an Access Key for your AWS Account
 
-# How to deploy
+## How to deploy
 
 1. Download the cloudformation-template.json and cloudformation-params.json from this repository
 2. Customise the parameters defined in cloudformation-params.json as required
@@ -19,6 +19,7 @@ This solution deploys a new Amazon AWS EC2 instance using CloudFormation and con
  `aws cloudformation create-stack --stack-name davidb-rea-deploy --template-body file:///home/davidb/rea-deploy/cloudformation-template.json --parameters file:///home/davidb/rea-deploy/cloudformation-params.json`
 
  This will begin the deployment. It will take a few minutes for the EC2 instance, and the simple-sinatra-app, to be available
+
 4. To find out the URL of the simple-sinatra-app run the following command, substituting the stack-name from the previous step.
 
  You may need to wait a minute for the EC2 instance to be available first:
@@ -29,7 +30,7 @@ This solution deploys a new Amazon AWS EC2 instance using CloudFormation and con
 
  As previously mentioned, the deploy does take a few minutes so the simple-sinatra-app will not be available immediately.
 
-# How does it work
+## How does it work
 This solution deploys a new EC2 instance based off Ubuntu's EC2 AMIs (found here: https://cloud-images.ubuntu.com/locator/ec2/) using CloudFormation.
 
 CloudFormation assigns a SecurityGroup which permits traffic to only port 80 and port 22 from a CIDR range defined in cloudformation-params (default is 0.0.0.0/0).
@@ -49,7 +50,7 @@ Salt configurations are then used to:
 6. Defines a Systemd service unit for the simple-sinatra-app
 7. Enables the simple-sinatra-app.service
 
-# Design Choices
+## Design Choices
 **CloudFormation**
 
 CloudFormation was chosen as an easy and consistent way to provision an EC2 instance and other required resources quickly in a repeatable way. It also allows for bootstrapping of the configuration by a Configuration Management tool, such as Salt.
@@ -61,3 +62,14 @@ Salt was chosen as it is a Configuration Management tool capable of being run in
 **Ubuntu**
 
 Ubuntu was chosen as Canonical provide base AMIs for most regions which enables the CloudFormation template to be very flexible and to be reused in future.
+
+**Security Group**
+
+A Security Group was used to lockdown network access rather than configuring iptables/ufw on the host to maintain simplicity.
+
+## Short Comings / Future Improvements
+
+ * An ELB could be configured to allow recovery of a failed host, allow additional hosts to be added to share the load, or allow Blue/Green deployments of new versions of software.
+ * A Salt-master could be added to allow centralised control of a greater numbers of hosts as well as remote deployment of new/updated salt states.
+ * Additional host lockdowns could be performed, such as following CIS (Center for Internet Security) Guidelines/Benchmarks. These were not performed to maintain the simplicity of the presented solution and due to the very small attack surface of the host.
+ * HTTPS could be configured, and automated using Lets Encrypt, to protect the integrity and privacy of the web traffic. This was not performed as part of this solution to maintain simplicity, and as the task explicitly asked that the simple-sinatra-app be available on HTTP on port 80.
