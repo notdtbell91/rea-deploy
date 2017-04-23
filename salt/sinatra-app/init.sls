@@ -62,6 +62,7 @@ simple-sinatra-app_unit:
 simple-sinatra-app_running:
     service.running:
         - name: simple-sinatra-app
+        - enable: True
         - watch:
             - module: simple-sinatra-app_unit
         - require:
